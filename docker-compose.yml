@@ -1,0 +1,23 @@
+version: '3.1'
+
+services:
+  app:
+    container_name: "application"
+    image: "playground-akkahttp:latest"
+    stdin_open: true
+    environment:
+      JDBC_DATABASE_URL: "jdbc:mariadb://database:3306/database?user=root&password=example"
+      JDBC_DATABASE_USERNAME: "root"
+      JDBC_DATABASE_PASSWORD: "example"
+    ports:
+      - 8081:8080
+
+  db:
+    container_name: "database"
+    image: 'mariadb:10.5.9-focal'
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'database'
+      MYSQL_ROOT_PASSWORD: 'example'
+    ports:
+      - 3307:3306
